@@ -1,0 +1,243 @@
+/* Resetando margens e paddings padrão */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Definindo a fonte e cor de fundo do corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2C3E50; /* Azul escuro com toque de roxo (azul meia-noite) */
+    color: #f4f4f4; /* Cor clara para o texto */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #2980B9; /* Azul mais suave para o cabeçalho */
+    color: white;
+    padding: 30px 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid #1A5276; /* Um azul um pouco mais escuro para a borda */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container principal */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo */
+    box-sizing: border-box;
+}
+
+/* Estilo da declaração */
+.declaration {
+    font-size: 1.8em;
+    color: #ecf0f1; /* Cor clara e suave para o texto */
+    margin-bottom: 40px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Estilo do carrossel de fotos */
+.photo-carousel {
+    position: relative;
+    max-width: 600px; /* Tamanho máximo do carrossel */
+    margin: 0 auto; /* Centraliza o carrossel */
+    overflow: hidden; /* Esconde as imagens que estão fora da área visível */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo das imagens no carrossel */
+.carousel-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+/* Ajustando as imagens para um tamanho fixo e proporcional */
+.carousel-image {
+    width: 100%;  /* Definindo para ocupar a largura total do carrossel */
+    max-width: 600px; /* Máximo de 600px de largura */
+    height: auto; /* Altura ajustável */
+    margin: 0 auto;
+    border-radius: 15px;
+    display: none; /* Inicialmente invisível */
+}
+
+/* Imagem ativa (visível) */
+.carousel-image.active {
+    display: block; /* Torna a imagem visível */
+}
+
+/* Botões do carrossel */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 2em;
+    border-radius: 50%;
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 1;
+}
+
+/* Posição das setas */
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Estilo do contador */
+.counter {
+    font-size: 2em;
+    margin-top: 40px;
+    font-weight: bold;
+    color: #3498DB; /* Azul claro para o contador */
+    margin-bottom: 50px; /* Adicionando um pouco de espaço para não colidir com o rodapé */
+}
+
+/* Rodapé fixo */
+.footer {
+    background-color: #2980B9;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Efeito de transição para o rodapé */
+.footer:hover {
+    background-color: #1A5276;
+    cursor: pointer;
+}
+
+/* Estilo do botão Surpresa */
+#surprise-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#surprise-button {
+    background-color: #2980B9; /* Azul romântico */
+    color: white;
+    font-size: 2em;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 30px; /* Bordas arredondadas */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Arial', sans-serif; /* Fonte mais suave */
+    text-transform: uppercase; /* Letras maiúsculas para dar ênfase */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaço entre o coração e o texto */
+}
+
+/* Estilo do ícone de coração */
+.heart {
+    font-size: 1.5em; /* Tamanho do coração */
+    color: red; /* Cor vermelha */
+    animation: heartbeat 1.5s infinite; /* Animação de batimento cardíaco */
+}
+
+/* Animação de batimento cardíaco (efeito de pulsação do coração) */
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animação de queda dos corações */
+@keyframes fall {
+    0% {
+        top: -10%;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* Estilo dos corações caindo */
+.falling-heart {
+    position: fixed; /* Fixa os corações na tela */
+    font-size: 20px;
+    color: red;
+    animation: fall 3s infinite linear;
+    opacity: 1;
+}
+
+/* Responsividade para telas pequenas */
+@media screen and (max-width: 768px) {
+    .carousel-image {
+        width: 90%;
+    }
+
+    header {
+        font-size: 2em;
+    }
+
+    .declaration {
+        font-size: 1.5em;
+    }
+
+    .counter {
+        font-size: 1.5em;
+    }
+
+    #surprise-button {
+        font-size: 1.5em;
+        padding: 15px 40px;
+    }
+
+    .footer {
+        font-size: 1em;
+    }
+
+    .prev, .next {
+        padding: 12px;
+        font-size: 1.5em;
+    }
+}

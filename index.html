@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Declaração de Amor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="surprise-button-container">
+        <button id="surprise-button" onclick="openPage()">
+            <span class="heart">&#10084;</span> Surpresa
+        </button>
+    </div>
+
+    <div id="page-container" style="display:none;">
+        <header>
+            Para minha Pitukinha
+        </header>
+
+        <div class="container">
+            <div class="declaration">
+                <p>Passando aqui no seu celular para deixar registrado que mesmo distantes, nada irá abalar nosso amor. Estarei para sempre perto de você, mesmo distante! E para deixar isso bem claro, tomei a liberdade de criar um contador em tempo real desde o início do nosso amor.</p>
+            </div>
+
+            <!-- Carrossel de fotos -->
+            <div class="photo-carousel">
+                <button class="prev" onclick="changePhoto(-1)">&#10094;</button>
+                <div class="carousel-images">
+                    <!-- Aqui ficam as imagens -->
+                    <img src="img/1.jpeg" alt="Foto 1" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-21 at 09.24.01.jpeg" alt="Foto 2" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-20 at 11.03.20 (1).jpeg" alt="Foto 3" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-20 at 11.03.20.jpeg" alt="Foto 4" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-20 at 11.04.10.jpeg" alt="Foto 5" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-20 at 11.05.01.jpeg" alt="Foto 6" class="carousel-image">
+                    <img src="img/WhatsApp Image 2025-03-20 at 11.05.40.jpeg" alt="Foto 7" class="carousel-image">
+                </div>
+                <button class="next" onclick="changePhoto(1)">&#10095;</button>
+            </div>
+
+            <div class="counter" id="counter">
+                <!-- O contador será gerado aqui -->
+            </div>
+        </div>
+
+        <div class="footer">
+            Feito com  muito ♥ e saudades para você!
+        </div>
+    </div>
+
+    <script>
+        // Data do início do namoro (substitua pela data real)
+        const startDate = new Date("2023-07-02T00:00:00");
+
+        function updateCounter() {
+            const now = new Date();
+            const timeDifference = now - startDate;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById("counter").innerHTML = `Estamos juntos há: ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos!`;
+        }
+
+        // Atualiza o contador a cada segundo
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Chama a função para exibir o contador imediatamente
+
+        // Carrossel de fotos
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel-image');
+        const totalImages = images.length;
+
+        function changePhoto(direction) {
+            // Remove a classe 'active' da imagem atual
+            images[currentIndex].classList.remove('active');
+
+            // Atualiza o índice
+            currentIndex += direction;
+
+            // Se o índice ultrapassar o número de imagens, volta para o começo
+            if (currentIndex < 0) {
+                currentIndex = totalImages - 1;
+            } else if (currentIndex >= totalImages) {
+                currentIndex = 0;
+            }
+
+            // Adiciona a classe 'active' à nova imagem
+            images[currentIndex].classList.add('active');
+        }
+
+        // Inicializa o carrossel com a primeira imagem visível
+        changePhoto(0);
+
+        // Função para abrir a página
+        function openPage() {
+            document.getElementById('surprise-button-container').style.display = 'none';
+            document.getElementById('page-container').style.display = 'block';
+            startHeartRain(); // Inicia a chuva de corações
+            playMusic(); // Inicia a música
+        }
+
+        // Função para iniciar a chuva de corações
+        function startHeartRain() {
+            setInterval(createFallingHeart, 200); // Cria um coração a cada 200ms
+        }
+
+        // Função para criar um coração caindo
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '&#10084;'; // Coração vermelho
+            document.body.appendChild(heart);
+
+            const startPosX = Math.random() * window.innerWidth; // Posição inicial aleatória em X
+            heart.style.left = startPosX + 'px';
+
+            const animationDuration = Math.random() * 3 + 2; // Duração aleatória da animação (entre 2 e 5 segundos)
+            heart.style.animationDuration = animationDuration + 's'; // Define a duração da animação
+
+            // Remove o coração do DOM após a animação terminar
+            setTimeout(() => {
+                heart.remove();
+            }, animationDuration * 1000);
+        }
+
+        // Função para tocar a música
+        function playMusic() {
+            const audio = new Audio('mp3/musica.mp3'); // Substitua 'musica.mp3' pelo caminho correto do seu arquivo de música
+            audio.play(); // Reproduz a música
+        }
+
+        // Adiciona eventos de swipe no carrossel para dispositivos móveis
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.photo-carousel').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.querySelector('.photo-carousel').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                changePhoto(1); // Swipe para a direita
+            } else if (touchEndX - touchStartX > 50) {
+                changePhoto(-1); // Swipe para a esquerda
+            }
+        });
+    </script>
+
+</body>
+</html>
